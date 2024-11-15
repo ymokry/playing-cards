@@ -1,11 +1,22 @@
 {
   "name": "playing-cards",
-  "module": "src/index.ts",
   "type": "module",
+  "module": "src/index.ts",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{json,html,css,md}": "prettier --write",
+    "*.{js,jsx,mjs,ts,tsx}": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@types/bun": "latest",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "prettier-plugin-packagejson": "^2.5.3"
   },
