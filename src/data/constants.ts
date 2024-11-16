@@ -13,6 +13,7 @@ export const CardRanks = {
   QUEEN: "Q",
   KING: "K",
 } as const;
+export type CardRank = (typeof CardRanks)[keyof typeof CardRanks];
 
 export const CardSuits = {
   SPADES: "S",
@@ -20,6 +21,7 @@ export const CardSuits = {
   DIAMONDS: "D",
   CLUBS: "C",
 } as const;
+export type CardSuit = (typeof CardSuits)[keyof typeof CardSuits];
 
 export const Palette = {
   RED: "#B02111",
@@ -27,3 +29,4 @@ export const Palette = {
   WHITE: "#000",
   NONE: "none",
 } as const;
+export type Color = (typeof Palette)[keyof typeof Palette];
