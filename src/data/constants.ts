@@ -20,3 +20,10 @@ export const CardSuits = {
   DIAMONDS: "D",
   CLUBS: "C",
 } as const;
+
+export const Palette = {
+  RED: "#B02111",
+  BLACK: "#151515",
+  WHITE: "#000",
+  NONE: "none",
+} as const;
