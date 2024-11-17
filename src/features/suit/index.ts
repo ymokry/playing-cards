@@ -1,9 +1,6 @@
 import assert from "node:assert";
 import { CardSuits, type CardSuit } from "@/data/constants";
-import Svg, {
-  schema as svgSchema,
-  constants as svgConstants,
-} from "@/features/svg";
+import Svg, { constants as svgConstants } from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getColorBySuit } from "@/utils/palette";
 import { getParsingErrorMessage } from "@/utils/schema";
