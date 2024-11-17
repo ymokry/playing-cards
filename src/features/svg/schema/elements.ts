@@ -140,15 +140,32 @@ const defsElementSchema = z.object({
 
 const svgAttributesSchema = z.object({
   [AttributeNames.XMLNS]: Attributes[AttributeNames.XMLNS],
+  [AttributeNames.VIEW_BOX]: Attributes[AttributeNames.VIEW_BOX].optional(),
+  [AttributeNames.WIDTH]: Attributes[AttributeNames.WIDTH].optional(),
+  [AttributeNames.HEIGHT]: Attributes[AttributeNames.HEIGHT].optional(),
   [AttributeNames.XMLNS_XLINK]:
     Attributes[AttributeNames.XMLNS_XLINK].optional(),
-  [AttributeNames.VIEW_BOX]: Attributes[AttributeNames.VIEW_BOX],
   [AttributeNames.FILL]: Attributes[AttributeNames.FILL].optional(),
+});
+
+const svgDimensionlessAttributesSchema = svgAttributesSchema.omit({
+  [AttributeNames.VIEW_BOX]: true,
+  [AttributeNames.WIDTH]: true,
+  [AttributeNames.HEIGHT]: true,
 });
 
 const svgContentSchema = z
   .object({
-    [attributesGroupName]: svgAttributesSchema,
+    [attributesGroupName]: z.union([
+      svgDimensionlessAttributesSchema.merge(
+        svgAttributesSchema.pick({ [AttributeNames.VIEW_BOX]: true }).required()
+      ),
+      svgDimensionlessAttributesSchema.merge(
+        svgAttributesSchema
+          .pick({ [AttributeNames.WIDTH]: true, [AttributeNames.HEIGHT]: true })
+          .required()
+      ),
+    ]),
   })
   .merge(useElementSchema.partial())
   .merge(rectElementSchema.partial())

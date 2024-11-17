@@ -13,10 +13,12 @@ const rankSvgSchema = z.object({
   [constants.ElementNames.SVG]: z.object({
     [constants.attributesGroupName]: schema.elements[
       constants.ElementNames.SVG
-    ].attributes.pick({
-      [constants.AttributeNames.XMLNS]: true,
-      [constants.AttributeNames.VIEW_BOX]: true,
-    }),
+    ].attributes
+      .pick({
+        [constants.AttributeNames.XMLNS]: true,
+        [constants.AttributeNames.VIEW_BOX]: true,
+      })
+      .required(),
     [constants.ElementNames.PATH]: z.object({
       [constants.attributesGroupName]: rankPathAttributesSchema,
     }),
