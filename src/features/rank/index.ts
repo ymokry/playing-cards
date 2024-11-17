@@ -1,13 +1,28 @@
 import assert from "node:assert";
 import { CardRanks, type CardRank } from "@/data/constants";
-import Svg, { constants as svgConstants } from "@/features/svg";
+import Svg, {
+  constants as svgConstants,
+  type schema as SVGSchema,
+} from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
 import { RankIDs } from "@/features/rank/data/constants";
-import schema, { type RankSVG, type RankSymbol } from "@/features/rank/schema";
+import schema, {
+  type RankSVG,
+  type RankSymbol,
+  type RankUse,
+} from "@/features/rank/schema";
 
 export type RanksRegistry = Map<CardRank, Rank>;
+type RankUseOptions = Required<
+  Pick<
+    SVGSchema.UseAttributes,
+    | typeof svgConstants.AttributeNames.X
+    | typeof svgConstants.AttributeNames.Y
+    | typeof svgConstants.AttributeNames.FILL
+  >
+> & { size: number };
 
 class Rank {
   private readonly type: CardRank;
@@ -21,6 +36,21 @@ class Rank {
     });
 
     return registry;
+  }
+
+  static use(type: CardRank, { size, ...attributes }: RankUseOptions): RankUse {
+    const result = schema.use.safeParse({
+      [svgConstants.attributesGroupName]: {
+        [svgConstants.AttributeNames.XLINK_HREF]: `#${RankIDs[type]}`,
+        [svgConstants.AttributeNames.WIDTH]: size,
+        [svgConstants.AttributeNames.HEIGHT]: size,
+        ...attributes,
+      },
+    });
+
+    assert(result.success, getParsingErrorMessage(result.error));
+
+    return result.data;
   }
 
   constructor(type: CardRank) {

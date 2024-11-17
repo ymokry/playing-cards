@@ -1,14 +1,31 @@
 import assert from "node:assert";
 import { CardSuits, type CardSuit } from "@/data/constants";
-import Svg, { constants as svgConstants } from "@/features/svg";
+import Svg, {
+  constants as svgConstants,
+  type schema as SVGSchema,
+} from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getColorBySuit } from "@/utils/palette";
 import { getParsingErrorMessage } from "@/utils/schema";
 
 import { SuitIDs } from "@/features/suit/data/constants";
-import schema, { type SuitSVG, type SuitSymbol } from "@/features/suit/schema";
+import schema, {
+  type SuitSVG,
+  type SuitSymbol,
+  type SuitUse,
+} from "@/features/suit/schema";
 
 export type SuitsRegistry = Map<CardSuit, Suit>;
+type SuitUseOptions = Required<
+  Pick<
+    SVGSchema.UseAttributes,
+    typeof svgConstants.AttributeNames.X | typeof svgConstants.AttributeNames.Y
+  >
+> &
+  Pick<
+    SVGSchema.UseAttributes,
+    typeof svgConstants.AttributeNames.TRANSFORM
+  > & { size: number };
 
 class Suit {
   private readonly type: CardSuit;
@@ -22,6 +39,21 @@ class Suit {
     });
 
     return registry;
+  }
+
+  static use(type: CardSuit, { size, ...attributes }: SuitUseOptions): SuitUse {
+    const result = schema.use.safeParse({
+      [svgConstants.attributesGroupName]: {
+        [svgConstants.AttributeNames.XLINK_HREF]: `#${SuitIDs[type]}`,
+        [svgConstants.AttributeNames.WIDTH]: size,
+        [svgConstants.AttributeNames.HEIGHT]: size,
+        ...attributes,
+      },
+    });
+
+    assert(result.success, getParsingErrorMessage(result.error));
+
+    return result.data;
   }
 
   constructor(type: CardSuit) {

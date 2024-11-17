@@ -39,4 +39,24 @@ const suitSymbolSchema = z.object({
 });
 export type SuitSymbol = z.infer<typeof suitSymbolSchema>;
 
-export default { svg: suitSvgSchema, symbol: suitSymbolSchema };
+const useAttributesSchema =
+  schema.elements[constants.ElementNames.USE].attributes;
+
+const suitUseSchema = z.object({
+  [constants.attributesGroupName]: useAttributesSchema
+    .omit({
+      [constants.AttributeNames.FILL]: true,
+      [constants.AttributeNames.TRANSFORM]: true,
+    })
+    .required()
+    .merge(
+      useAttributesSchema.pick({ [constants.AttributeNames.TRANSFORM]: true })
+    ),
+});
+export type SuitUse = z.infer<typeof suitUseSchema>;
+
+export default {
+  svg: suitSvgSchema,
+  symbol: suitSymbolSchema,
+  use: suitUseSchema,
+};

@@ -33,4 +33,17 @@ const rankSymbolSchema = z.object({
 });
 export type RankSymbol = z.infer<typeof rankSymbolSchema>;
 
-export default { svg: rankSvgSchema, symbol: rankSymbolSchema };
+const rankUseSchema = z.object({
+  [constants.attributesGroupName]: schema.elements[
+    constants.ElementNames.USE
+  ].attributes
+    .omit({ [constants.AttributeNames.TRANSFORM]: true })
+    .required(),
+});
+export type RankUse = z.infer<typeof rankUseSchema>;
+
+export default {
+  svg: rankSvgSchema,
+  symbol: rankSymbolSchema,
+  use: rankUseSchema,
+};
