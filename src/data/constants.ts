@@ -24,9 +24,10 @@ export const CardSuits = {
 export type CardSuit = (typeof CardSuits)[keyof typeof CardSuits];
 
 export const Palette = {
-  RED: "#B02111",
   BLACK: "#151515",
-  WHITE: "#000",
+  BLUE: "#152AAB",
   NONE: "none",
+  RED: "#AB2A15",
+  WHITE: "#000",
 } as const;
 export type Color = (typeof Palette)[keyof typeof Palette];

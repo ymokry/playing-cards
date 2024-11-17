@@ -11,9 +11,10 @@ import {
 
 const paletteValueSchema = z.enum([
   Palette.BLACK,
+  Palette.BLUE,
+  Palette.NONE,
   Palette.RED,
   Palette.WHITE,
-  Palette.NONE,
 ]);
 const pxValueSchema = z.coerce.number().nonnegative();
 const coordinateValueSchema = z.coerce.number();
