@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { type CardSuit } from "@/data/constants";
+import { CardSuits, type CardSuit } from "@/data/constants";
 import Svg, {
   schema as svgSchema,
   constants as svgConstants,
@@ -11,9 +11,21 @@ import { getParsingErrorMessage } from "@/utils/schema";
 import { SuitIDs } from "@/features/suit/data/constants";
 import schema, { type SuitSVG, type SuitSymbol } from "@/features/suit/schema";
 
+export type SuitsRegistry = Map<CardSuit, Suit>;
+
 class Suit {
   private readonly type: CardSuit;
   private resource: SuitSVG | null = null;
+
+  static get registry(): SuitsRegistry {
+    const registry = new Map<CardSuit, Suit>();
+
+    Object.values(CardSuits).forEach((suit) => {
+      registry.set(suit, new Suit(suit));
+    });
+
+    return registry;
+  }
 
   constructor(type: CardSuit) {
     this.type = type;
