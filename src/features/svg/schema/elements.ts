@@ -158,6 +158,8 @@ const svgElementSchema = z.object({
   [ElementNames.SVG]: svgContentSchema,
 });
 
+export type SVGElement = z.infer<typeof svgElementSchema>;
+
 export default {
   [ElementNames.SVG]: {
     attributes: svgAttributesSchema,
