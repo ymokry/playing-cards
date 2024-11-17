@@ -4,10 +4,12 @@ import Rank, { type RankSymbol, type RanksRegistry } from "@/features/rank";
 import Suit, { type SuitSymbol, type SuitsRegistry } from "@/features/suit";
 import Court, { type CourtSymbol, type CourtsRegistry } from "@/features/court";
 
+import { ResourceTypes } from "@/features/resources/data/constants";
+
 interface ResourcesRegistry {
-  suits: SuitsRegistry;
-  ranks: RanksRegistry;
-  courts: CourtsRegistry;
+  [ResourceTypes.SUIT]: SuitsRegistry;
+  [ResourceTypes.RANK]: RanksRegistry;
+  [ResourceTypes.COURT]: CourtsRegistry;
 }
 
 class Resources {
@@ -16,9 +18,9 @@ class Resources {
 
   constructor() {
     this.registry = {
-      suits: Suit.registry,
-      ranks: Rank.registry,
-      courts: Court.registry,
+      [ResourceTypes.SUIT]: Suit.registry,
+      [ResourceTypes.RANK]: Rank.registry,
+      [ResourceTypes.COURT]: Court.registry,
     };
   }
 
@@ -27,15 +29,15 @@ class Resources {
 
     const resourcePromises: Promise<void>[] = [];
 
-    this.registry.suits.forEach((suit) => {
+    this.registry[ResourceTypes.SUIT].forEach((suit) => {
       resourcePromises.push(suit.prepare());
     });
 
-    this.registry.ranks.forEach((suit) => {
-      resourcePromises.push(suit.prepare());
+    this.registry[ResourceTypes.RANK].forEach((rank) => {
+      resourcePromises.push(rank.prepare());
     });
 
-    this.registry.courts.forEach((court) => {
+    this.registry[ResourceTypes.COURT].forEach((court) => {
       resourcePromises.push(court.prepare());
     });
 
@@ -47,7 +49,7 @@ class Resources {
   getSuit(type: CardSuit): SuitSymbol {
     assert(this.loaded, "Must be loaded before use");
 
-    const resource = this.registry.suits.get(type);
+    const resource = this.registry[ResourceTypes.SUIT].get(type);
 
     assert(resource, `Suit ${type} doesn't exist`);
 
@@ -57,7 +59,7 @@ class Resources {
   getRank(type: CardRank): RankSymbol {
     assert(this.loaded, "Must be loaded before use");
 
-    const resource = this.registry.ranks.get(type);
+    const resource = this.registry[ResourceTypes.RANK].get(type);
 
     assert(resource, `Rank ${type} doesn't exist`);
 
@@ -67,12 +69,14 @@ class Resources {
   getCourt(type: CourtCard): CourtSymbol {
     assert(this.loaded, "Must be loaded before use");
 
-    const resource = this.registry.courts.get(type);
+    const resource = this.registry[ResourceTypes.COURT].get(type);
 
     assert(resource, `Rank ${type} doesn't exist`);
 
     return resource.symbol;
   }
 }
+
+export * as constants from "@/features/resources/data/constants";
 
 export default new Resources();
