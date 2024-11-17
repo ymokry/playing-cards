@@ -39,7 +39,9 @@ export default {
   [AttributeNames.ID]: z.string().min(1),
   [AttributeNames.TRANSFORM]: z.string().min(1),
   [AttributeNames.PRESERVE_ASPECT_RATIO]: z.enum([AspectRatios.MIN_MID]),
-  [AttributeNames.FILL]: paletteValueSchema,
+  [AttributeNames.FILL]: paletteValueSchema.or(
+    z.string().min(7).startsWith("url(#").endsWith(")")
+  ),
   [AttributeNames.FILL_RULE]: z.enum([FillRules.EVEN_ODD]),
   [AttributeNames.STROKE]: paletteValueSchema,
   [AttributeNames.STROKE_LINECAP]: strokeTypeSchema,
