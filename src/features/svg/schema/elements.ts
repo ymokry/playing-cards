@@ -65,6 +65,7 @@ const rectWithIDElementSchema = z.object({
 const pathAttributesSchema = z.object({
   [AttributeNames.D]: Attributes[AttributeNames.D],
   [AttributeNames.FILL]: Attributes[AttributeNames.FILL].optional(),
+  [AttributeNames.FILL_RULE]: Attributes[AttributeNames.FILL_RULE].optional(),
   [AttributeNames.STROKE]: Attributes[AttributeNames.STROKE].optional(),
   [AttributeNames.STROKE_WIDTH]:
     Attributes[AttributeNames.STROKE_WIDTH].optional(),
