@@ -16,6 +16,7 @@ const useAttributesSchema = z.object({
   [AttributeNames.Y]: Attributes[AttributeNames.Y].optional(),
   [AttributeNames.TRANSFORM]: Attributes[AttributeNames.TRANSFORM].optional(),
 });
+export type UseAttributes = z.infer<typeof useAttributesSchema>;
 
 const useContentSchema = z.object({
   [attributesGroupName]: useAttributesSchema,
