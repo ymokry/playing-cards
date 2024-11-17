@@ -27,8 +27,15 @@ const rankSvgSchema = z.object({
 export type RankSVG = z.infer<typeof rankSvgSchema>;
 
 const rankSymbolSchema = z.object({
-  [constants.attributesGroupName]:
-    schema.elements[constants.ElementNames.SYMBOL].attributes.required(),
+  [constants.attributesGroupName]: schema.elements[
+    constants.ElementNames.SYMBOL
+  ].attributes
+    .pick({
+      [constants.AttributeNames.ID]: true,
+      [constants.AttributeNames.VIEW_BOX]: true,
+      [constants.AttributeNames.PRESERVE_ASPECT_RATIO]: true,
+    })
+    .required(),
   [constants.ElementNames.PATH]: z.object({
     [constants.attributesGroupName]: rankPathAttributesSchema,
   }),

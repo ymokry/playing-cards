@@ -28,9 +28,12 @@ export type SuitSVG = z.infer<typeof suitSvgSchema>;
 const suitSymbolSchema = z.object({
   [constants.attributesGroupName]: schema.elements[
     constants.ElementNames.SYMBOL
-  ].attributes.omit({
-    [constants.AttributeNames.PRESERVE_ASPECT_RATIO]: true,
-  }),
+  ].attributes
+    .pick({
+      [constants.AttributeNames.ID]: true,
+      [constants.AttributeNames.VIEW_BOX]: true,
+    })
+    .required(),
   [constants.ElementNames.PATH]: z.object({
     [constants.attributesGroupName]: suitPathBaseAttributesSchema.merge(
       pathAttributesSchema

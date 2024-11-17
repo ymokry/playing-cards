@@ -109,14 +109,34 @@ const gElementSchema = z.object({
 
 const symbolAttributesSchema = z.object({
   [AttributeNames.ID]: Attributes[AttributeNames.ID],
-  [AttributeNames.VIEW_BOX]: Attributes[AttributeNames.VIEW_BOX],
+  [AttributeNames.VIEW_BOX]: Attributes[AttributeNames.VIEW_BOX].optional(),
+  [AttributeNames.WIDTH]: Attributes[AttributeNames.WIDTH].optional(),
+  [AttributeNames.HEIGHT]: Attributes[AttributeNames.HEIGHT].optional(),
+  [AttributeNames.FILL]: Attributes[AttributeNames.FILL].optional(),
   [AttributeNames.PRESERVE_ASPECT_RATIO]:
     Attributes[AttributeNames.PRESERVE_ASPECT_RATIO].optional(),
 });
 
+const symbolDimensionlessAttributesSchema = symbolAttributesSchema.omit({
+  [AttributeNames.VIEW_BOX]: true,
+  [AttributeNames.WIDTH]: true,
+  [AttributeNames.HEIGHT]: true,
+});
+
 const symbolContentSchema = z
   .object({
-    [attributesGroupName]: symbolAttributesSchema,
+    [attributesGroupName]: z.union([
+      symbolDimensionlessAttributesSchema.merge(
+        symbolAttributesSchema
+          .pick({ [AttributeNames.VIEW_BOX]: true })
+          .required()
+      ),
+      symbolDimensionlessAttributesSchema.merge(
+        symbolAttributesSchema
+          .pick({ [AttributeNames.WIDTH]: true, [AttributeNames.HEIGHT]: true })
+          .required()
+      ),
+    ]),
   })
   .merge(useElementSchema.partial())
   .merge(rectElementSchema.partial())
