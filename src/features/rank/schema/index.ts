@@ -25,12 +25,10 @@ const rankSvgSchema = z.object({
 export type RankSVG = z.infer<typeof rankSvgSchema>;
 
 const rankSymbolSchema = z.object({
-  [constants.ElementNames.SYMBOL]: z.object({
-    [constants.attributesGroupName]:
-      schema.elements[constants.ElementNames.SYMBOL].attributes.required(),
-    [constants.ElementNames.PATH]: z.object({
-      [constants.attributesGroupName]: rankPathAttributesSchema,
-    }),
+  [constants.attributesGroupName]:
+    schema.elements[constants.ElementNames.SYMBOL].attributes.required(),
+  [constants.ElementNames.PATH]: z.object({
+    [constants.attributesGroupName]: rankPathAttributesSchema,
   }),
 });
 export type RankSymbol = z.infer<typeof rankSymbolSchema>;

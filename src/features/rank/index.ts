@@ -57,25 +57,21 @@ class Rank {
       ];
 
     const result = schema.symbol.safeParse({
-      [svgConstants.ElementNames.SYMBOL]: {
+      [svgConstants.attributesGroupName]: {
+        [svgConstants.AttributeNames.ID]: RankIDs[this.type],
+        [svgConstants.AttributeNames.VIEW_BOX]:
+          resourceAttributes[svgConstants.AttributeNames.VIEW_BOX],
+        [svgConstants.AttributeNames.PRESERVE_ASPECT_RATIO]:
+          svgConstants.AspectRatios.MIN_MID,
+      },
+      [svgConstants.ElementNames.PATH]: {
         [svgConstants.attributesGroupName]: {
-          [svgConstants.AttributeNames.ID]: RankIDs[this.type],
-          [svgConstants.AttributeNames.VIEW_BOX]:
-            resourceAttributes[svgConstants.AttributeNames.VIEW_BOX],
-          [svgConstants.AttributeNames.PRESERVE_ASPECT_RATIO]:
-            svgConstants.AspectRatios.MIN_MID,
-        },
-        [svgConstants.ElementNames.PATH]: {
-          [svgConstants.attributesGroupName]: {
-            [svgConstants.AttributeNames.D]:
-              resourcePathAttributes[svgConstants.AttributeNames.D],
-            ...(resourcePathAttributes[
-              svgConstants.AttributeNames.FILL_RULE
-            ] && {
-              [svgConstants.AttributeNames.FILL_RULE]:
-                resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE],
-            }),
-          },
+          [svgConstants.AttributeNames.D]:
+            resourcePathAttributes[svgConstants.AttributeNames.D],
+          ...(resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE] && {
+            [svgConstants.AttributeNames.FILL_RULE]:
+              resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE],
+          }),
         },
       },
     });

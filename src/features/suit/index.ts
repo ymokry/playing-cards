@@ -58,18 +58,16 @@ class Suit {
       ];
 
     const result = schema.symbol.safeParse({
-      [svgConstants.ElementNames.SYMBOL]: {
+      [svgConstants.attributesGroupName]: {
+        [svgConstants.AttributeNames.ID]: SuitIDs[this.type],
+        [svgConstants.AttributeNames.VIEW_BOX]:
+          resourceAttributes[svgConstants.AttributeNames.VIEW_BOX],
+      },
+      [svgConstants.ElementNames.PATH]: {
         [svgConstants.attributesGroupName]: {
-          [svgConstants.AttributeNames.ID]: SuitIDs[this.type],
-          [svgConstants.AttributeNames.VIEW_BOX]:
-            resourceAttributes[svgConstants.AttributeNames.VIEW_BOX],
-        },
-        [svgConstants.ElementNames.PATH]: {
-          [svgConstants.attributesGroupName]: {
-            [svgConstants.AttributeNames.FILL]: getColorBySuit(this.type),
-            [svgConstants.AttributeNames.D]:
-              resourcePathAttributes[svgConstants.AttributeNames.D],
-          },
+          [svgConstants.AttributeNames.FILL]: getColorBySuit(this.type),
+          [svgConstants.AttributeNames.D]:
+            resourcePathAttributes[svgConstants.AttributeNames.D],
         },
       },
     });

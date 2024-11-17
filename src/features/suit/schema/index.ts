@@ -24,19 +24,17 @@ const suitSvgSchema = z.object({
 export type SuitSVG = z.infer<typeof suitSvgSchema>;
 
 const suitSymbolSchema = z.object({
-  [constants.ElementNames.SYMBOL]: z.object({
-    [constants.attributesGroupName]: schema.elements[
-      constants.ElementNames.SYMBOL
-    ].attributes.omit({
-      [constants.AttributeNames.PRESERVE_ASPECT_RATIO]: true,
-    }),
-    [constants.ElementNames.PATH]: z.object({
-      [constants.attributesGroupName]: suitPathBaseAttributesSchema.merge(
-        pathAttributesSchema
-          .pick({ [constants.AttributeNames.FILL]: true })
-          .required()
-      ),
-    }),
+  [constants.attributesGroupName]: schema.elements[
+    constants.ElementNames.SYMBOL
+  ].attributes.omit({
+    [constants.AttributeNames.PRESERVE_ASPECT_RATIO]: true,
+  }),
+  [constants.ElementNames.PATH]: z.object({
+    [constants.attributesGroupName]: suitPathBaseAttributesSchema.merge(
+      pathAttributesSchema
+        .pick({ [constants.AttributeNames.FILL]: true })
+        .required()
+    ),
   }),
 });
 export type SuitSymbol = z.infer<typeof suitSymbolSchema>;
