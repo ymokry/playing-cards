@@ -23,6 +23,22 @@ export const CardSuits = {
 } as const;
 export type CardSuit = (typeof CardSuits)[keyof typeof CardSuits];
 
+export const CourtRanks = [
+  CardRanks.JACK,
+  CardRanks.QUEEN,
+  CardRanks.KING,
+] as const;
+export type CourtRank = (typeof CourtRanks)[number];
+
+export const SpecialCards = {
+  BACK: "Back",
+  CUT: "Cut",
+} as const;
+export type SpecialCard = (typeof SpecialCards)[keyof typeof SpecialCards];
+
+export type PlayingCard = `${CardSuit}_${CardRank}`;
+export type CourtCard = `${CardSuit}_${CourtRank}`;
+
 export const Palette = {
   BLACK: "#151515",
   BLUE: "#152AAB",
