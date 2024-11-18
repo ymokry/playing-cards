@@ -22,7 +22,7 @@ import schema, {
 import setCourtColor from "@/features/court/utils/setCourtColor";
 
 export type CourtsRegistry = Map<CourtCard, Court>;
-type RankUseOptions = Required<
+type CourtUseOptions = Required<
   Pick<
     SVGSchema.UseAttributes,
     typeof svgConstants.AttributeNames.X | typeof svgConstants.AttributeNames.Y
@@ -47,7 +47,7 @@ class Court {
     return registry;
   }
 
-  static use(type: CourtCard, options: RankUseOptions): CourtUse {
+  static use(type: CourtCard, options: CourtUseOptions): CourtUse {
     const result = schema.use.safeParse({
       [svgConstants.attributesGroupName]: {
         [svgConstants.AttributeNames.XLINK_HREF]: `#${CourtIDs[type]}`,
