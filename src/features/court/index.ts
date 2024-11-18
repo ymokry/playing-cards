@@ -1,5 +1,11 @@
 import assert from "node:assert";
-import { CardSuits, CourtRanks, type CourtCard } from "@/data/constants";
+import {
+  CardSuits,
+  type CardRank,
+  CourtRanks,
+  type CourtRank,
+  type CourtCard,
+} from "@/data/constants";
 import Svg, {
   constants as svgConstants,
   type schema as SVGSchema,
@@ -52,6 +58,10 @@ class Court {
     assert(result.success, getParsingErrorMessage(result.error));
 
     return result.data;
+  }
+
+  static isCourtRank(type: CardRank): boolean {
+    return CourtRanks.includes(type as CourtRank);
   }
 
   constructor(type: CourtCard) {
