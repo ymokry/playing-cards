@@ -44,7 +44,11 @@ class SVG {
   }
 
   stringify(input: SVGElement): string {
-    return this.builder.build(input);
+    const result = elements[ElementNames.SVG].element.safeParse(input);
+
+    assert(result.success, getParsingErrorMessage(result.error));
+
+    return this.builder.build(result.data);
   }
 }
 
