@@ -150,6 +150,26 @@ const symbolElementSchema = z.object({
   ]),
 });
 
+const patternAttributesSchema = z.object({
+  [AttributeNames.ID]: Attributes[AttributeNames.ID],
+  [AttributeNames.WIDTH]: Attributes[AttributeNames.WIDTH],
+  [AttributeNames.HEIGHT]: Attributes[AttributeNames.HEIGHT],
+  [AttributeNames.PATTERN_UNITS]: Attributes[AttributeNames.PATTERN_UNITS],
+});
+
+const patternContentSchema = z
+  .object({
+    [attributesGroupName]: patternAttributesSchema,
+  })
+  .merge(pathElementSchema.partial());
+
+const patternElementSchema = z.object({
+  [ElementNames.PATTERN]: z.union([
+    patternContentSchema,
+    patternContentSchema.array().nonempty(),
+  ]),
+});
+
 const defsContentSchema = symbolElementSchema
   .merge(rectWithIDElementSchema)
   .partial();
@@ -208,6 +228,11 @@ export default {
   [ElementNames.DEFS]: {
     content: defsContentSchema,
     element: defsElementSchema,
+  },
+  [ElementNames.PATTERN]: {
+    attributes: patternAttributesSchema,
+    content: patternContentSchema,
+    element: patternElementSchema,
   },
   [ElementNames.SYMBOL]: {
     attributes: symbolAttributesSchema,

@@ -41,6 +41,10 @@ export const StrokeTypes = {
   ROUND: "round",
 } as const;
 
+export const PatternUnits = {
+  USER_SPACE: "userSpaceOnUse",
+} as const;
+
 export const ElementNames = {
   SVG: "svg",
   DEFS: "defs",
@@ -49,8 +53,5 @@ export const ElementNames = {
   RECT: "rect",
   PATH: "path",
   USE: "use",
-} as const;
-
-export const PatternUnits = {
-  USER_SPACE: "userSpaceOnUse",
+  PATTERN: "pattern",
 } as const;
