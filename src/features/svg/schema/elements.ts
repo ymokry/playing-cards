@@ -173,6 +173,7 @@ const patternElementSchema = z.object({
 
 const defsContentSchema = symbolElementSchema
   .merge(rectWithIDElementSchema)
+  .merge(patternElementSchema)
   .partial();
 
 const defsElementSchema = z.object({
