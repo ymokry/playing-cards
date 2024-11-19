@@ -1,10 +1,10 @@
 import assert from "node:assert";
+import { Palette, type Color } from "@/data/constants";
 import Svg, {
   constants as svgConstants,
   type UseAttributes,
 } from "@/features/svg";
 import { getAsset } from "@/utils/file";
-import { getColorBySuit } from "@/utils/palette";
 import { getParsingErrorMessage } from "@/utils/schema";
 
 import { SuitIDs, SuitTypes } from "@/features/suit/data/constants";
@@ -55,6 +55,15 @@ class Suit {
     return result.data;
   }
 
+  static getColorBySuit(type: SuitType): Color {
+    const redSuit: Readonly<SuitType[]> = [
+      SuitTypes.DIAMONDS,
+      SuitTypes.HEARTS,
+    ];
+
+    return redSuit.includes(type) ? Palette.RED : Palette.BLACK;
+  }
+
   constructor(type: SuitType) {
     this.type = type;
   }
@@ -96,7 +105,7 @@ class Suit {
       },
       [svgConstants.ElementNames.PATH]: {
         [svgConstants.attributesGroupName]: {
-          [svgConstants.AttributeNames.FILL]: getColorBySuit(this.type),
+          [svgConstants.AttributeNames.FILL]: Suit.getColorBySuit(this.type),
           [svgConstants.AttributeNames.D]:
             resourcePathAttributes[svgConstants.AttributeNames.D],
         },
