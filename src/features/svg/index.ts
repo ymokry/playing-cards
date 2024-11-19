@@ -6,7 +6,7 @@ import {
   attributesGroupName,
   ElementNames,
 } from "@/features/svg/data/constants";
-import { elements, type SVGElement } from "@/features/svg/schema";
+import schema, { type SVGElement } from "@/features/svg/schema";
 
 type SVGOptions = Required<
   Pick<
@@ -36,7 +36,7 @@ class SVG {
 
   parse(input: string): SVGElement {
     const content = this.parser.parse(input);
-    const result = elements[ElementNames.SVG].element.safeParse(content);
+    const result = schema.elements[ElementNames.SVG].element.safeParse(content);
 
     assert(result.success, getParsingErrorMessage(result.error));
 
@@ -44,7 +44,7 @@ class SVG {
   }
 
   stringify(input: SVGElement): string {
-    const result = elements[ElementNames.SVG].element.safeParse(input);
+    const result = schema.elements[ElementNames.SVG].element.safeParse(input);
 
     assert(result.success, getParsingErrorMessage(result.error));
 
@@ -53,6 +53,10 @@ class SVG {
 }
 
 export * as constants from "@/features/svg/data/constants";
-export * as schema from "@/features/svg/schema";
+export {
+  default as schema,
+  type RectAttributes,
+  type UseAttributes,
+} from "@/features/svg/schema";
 
 export default new SVG();

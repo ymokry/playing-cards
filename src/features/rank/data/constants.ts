@@ -13,7 +13,6 @@ export const RanksTypes = {
   QUEEN: "Q",
   KING: "K",
 } as const;
-export type RankType = (typeof RanksTypes)[keyof typeof RanksTypes];
 
 export const RankIDs = {
   [RanksTypes.ACE]: "ra",

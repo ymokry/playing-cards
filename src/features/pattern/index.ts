@@ -2,26 +2,23 @@ import assert from "node:assert";
 import { Palette } from "@/data/constants";
 import Svg, {
   constants as svgConstants,
-  type schema as SVGSchema,
+  type RectAttributes,
 } from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import {
-  PatternIDs,
-  PatternTypes,
-  type PatternType,
-} from "@/features/pattern/data/constants";
+import { PatternIDs, PatternTypes } from "@/features/pattern/data/constants";
 import schema, {
   type PatternSVG,
   type PatternDef,
   type PatternRect,
 } from "@/features/pattern/schema";
+import { type PatternType } from "@/features/pattern/types";
 
 export type PatternRegistry = Map<PatternType, Pattern>;
 export type PatternRectOptions = Required<
   Pick<
-    SVGSchema.RectAttributes,
+    RectAttributes,
     | typeof svgConstants.AttributeNames.WIDTH
     | typeof svgConstants.AttributeNames.HEIGHT
     | typeof svgConstants.AttributeNames.X
@@ -126,6 +123,7 @@ class Pattern {
 }
 
 export * as constants from "@/features/pattern/data/constants";
+export * from "@/features/pattern/types";
 export { default as schema, type PatternDef } from "@/features/pattern/schema";
 
 export default Pattern;

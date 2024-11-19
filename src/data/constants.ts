@@ -1,5 +1,5 @@
-import { constants as rankConstants } from "@/features/rank";
-import { type constants as SuitConstants } from "@/features/suit";
+import { type RankType } from "@/features/rank";
+import { type SuitType } from "@/features/suit";
 
 export const SpecialCards = {
   BACK: "Back",
@@ -7,7 +7,7 @@ export const SpecialCards = {
 } as const;
 export type SpecialCard = (typeof SpecialCards)[keyof typeof SpecialCards];
 
-export type PlayingCard = `${SuitConstants.SuitType}_${rankConstants.RankType}`;
+export type PlayingCard = `${SuitType}_${RankType}`;
 
 export const Palette = {
   BLACK: "#151515",

@@ -1,6 +1,6 @@
 import { Palette, type Color } from "@/data/constants";
-import { type constants as SuitConstants } from "@/features/suit";
+import { type SuitType } from "@/features/suit";
 import { isRedSuit } from "@/utils/suit";
 
-export const getColorBySuit = (suit: SuitConstants.SuitType): Color =>
+export const getColorBySuit = (suit: SuitType): Color =>
   isRedSuit(suit) ? Palette.RED : Palette.BLACK;

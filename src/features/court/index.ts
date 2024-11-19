@@ -1,30 +1,26 @@
 import assert from "node:assert";
-import { type constants as RankConstants } from "@/features/rank";
+import { type RankType } from "@/features/rank";
 import { constants as suitConstants } from "@/features/suit";
 import Svg, {
   constants as svgConstants,
-  type schema as SVGSchema,
+  type UseAttributes,
 } from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import {
-  CourtIDs,
-  CourtRanks,
-  type CourtRank,
-  type CourtCard,
-} from "@/features/court/data/constants";
+import { CourtIDs, CourtRanks } from "@/features/court/data/constants";
 import schema, {
   type CourtSVG,
   type CourtSymbol,
   type CourtUse,
 } from "@/features/court/schema";
 import setCourtColor from "@/features/court/utils/setCourtColor";
+import { type CourtRank, type CourtCard } from "@/features/court/types";
 
 export type CourtsRegistry = Map<CourtCard, Court>;
 export type CourtUseOptions = Required<
   Pick<
-    SVGSchema.UseAttributes,
+    UseAttributes,
     typeof svgConstants.AttributeNames.X | typeof svgConstants.AttributeNames.Y
   >
 >;
@@ -60,7 +56,7 @@ class Court {
     return result.data;
   }
 
-  static isCourtRank(type: RankConstants.RankType): type is CourtRank {
+  static isCourtRank(type: RankType): type is CourtRank {
     return CourtRanks.includes(type as CourtRank);
   }
 
@@ -111,6 +107,7 @@ class Court {
 }
 
 export * as constants from "@/features/court/data/constants";
+export * from "@/features/court/types";
 export { default as schema, type CourtSymbol } from "@/features/court/schema";
 
 export default Court;

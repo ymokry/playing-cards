@@ -16,7 +16,6 @@ const useAttributesSchema = z.object({
   [AttributeNames.Y]: Attributes[AttributeNames.Y].optional(),
   [AttributeNames.TRANSFORM]: Attributes[AttributeNames.TRANSFORM].optional(),
 });
-export type UseAttributes = z.infer<typeof useAttributesSchema>;
 
 const useContentSchema = z.object({
   [attributesGroupName]: useAttributesSchema,
@@ -38,7 +37,6 @@ const rectAttributesSchema = z.object({
   [AttributeNames.RX]: Attributes[AttributeNames.RX].optional(),
   [AttributeNames.RY]: Attributes[AttributeNames.RY].optional(),
 });
-export type RectAttributes = z.infer<typeof rectAttributesSchema>;
 
 const rectContentSchema = z.object({
   [attributesGroupName]: rectAttributesSchema,
@@ -217,8 +215,6 @@ const svgContentSchema = z
 const svgElementSchema = z.object({
   [ElementNames.SVG]: svgContentSchema,
 });
-
-export type SVGElement = z.infer<typeof svgElementSchema>;
 
 export default {
   [ElementNames.SVG]: {

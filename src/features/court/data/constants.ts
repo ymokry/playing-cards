@@ -6,7 +6,6 @@ export const CourtRanks = [
   rankConstants.RanksTypes.QUEEN,
   rankConstants.RanksTypes.KING,
 ] as const;
-export type CourtRank = (typeof CourtRanks)[number];
 
 export const CourtIDs = {
   [`${suitConstants.SuitTypes.CLUBS}_${rankConstants.RanksTypes.JACK}` as const]: `ccj`,
@@ -22,5 +21,3 @@ export const CourtIDs = {
   [`${suitConstants.SuitTypes.HEARTS}_${rankConstants.RanksTypes.KING}` as const]: `chk`,
   [`${suitConstants.SuitTypes.SPADES}_${rankConstants.RanksTypes.KING}` as const]: `csk`,
 } as const;
-
-export type CourtCard = `${suitConstants.SuitType}_${CourtRank}`;

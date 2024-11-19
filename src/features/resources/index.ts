@@ -2,22 +2,22 @@ import assert from "node:assert";
 import Rank, {
   type RankSymbol,
   type RanksRegistry,
-  type constants as RankConstants,
+  type RankType,
 } from "@/features/rank";
 import Suit, {
   type SuitSymbol,
   type SuitsRegistry,
-  type constants as SuitConstants,
+  type SuitType,
 } from "@/features/suit";
 import Court, {
   type CourtSymbol,
   type CourtsRegistry,
-  type constants as CourtConstants,
+  type CourtCard,
 } from "@/features/court";
 import Pattern, {
   type PatternDef,
   type PatternRegistry,
-  type constants as PatternConstants,
+  type PatternType,
 } from "@/features/pattern";
 
 import { ResourceTypes } from "@/features/resources/data/constants";
@@ -68,7 +68,7 @@ class Resources {
     this.loaded = true;
   }
 
-  getSuit(type: SuitConstants.SuitType): SuitSymbol {
+  getSuit(type: SuitType): SuitSymbol {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.SUIT].get(type);
@@ -78,7 +78,7 @@ class Resources {
     return resource.symbol;
   }
 
-  getRank(type: RankConstants.RankType): RankSymbol {
+  getRank(type: RankType): RankSymbol {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.RANK].get(type);
@@ -88,7 +88,7 @@ class Resources {
     return resource.symbol;
   }
 
-  getCourt(type: CourtConstants.CourtCard): CourtSymbol {
+  getCourt(type: CourtCard): CourtSymbol {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.COURT].get(type);
@@ -98,7 +98,7 @@ class Resources {
     return resource.symbol;
   }
 
-  getPattern(type: PatternConstants.PatternType): PatternDef {
+  getPattern(type: PatternType): PatternDef {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.PATTERN].get(type);
@@ -110,5 +110,6 @@ class Resources {
 }
 
 export * as constants from "@/features/resources/data/constants";
+export * from "@/features/resources/types";
 
 export default new Resources();

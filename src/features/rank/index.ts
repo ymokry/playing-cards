@@ -1,26 +1,23 @@
 import assert from "node:assert";
 import Svg, {
   constants as svgConstants,
-  type schema as SVGSchema,
+  type UseAttributes,
 } from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import {
-  RankIDs,
-  RanksTypes,
-  type RankType,
-} from "@/features/rank/data/constants";
+import { RankIDs, RanksTypes } from "@/features/rank/data/constants";
 import schema, {
   type RankSVG,
   type RankSymbol,
   type RankUse,
 } from "@/features/rank/schema";
+import { type RankType } from "@/features/rank/types";
 
 export type RanksRegistry = Map<RankType, Rank>;
 export type RankUseOptions = Required<
   Pick<
-    SVGSchema.UseAttributes,
+    UseAttributes,
     | typeof svgConstants.AttributeNames.X
     | typeof svgConstants.AttributeNames.Y
     | typeof svgConstants.AttributeNames.FILL
@@ -116,6 +113,7 @@ class Rank {
 }
 
 export * as constants from "@/features/rank/data/constants";
+export * from "@/features/rank/types";
 export { default as schema, type RankSymbol } from "@/features/rank/schema";
 
 export default Rank;

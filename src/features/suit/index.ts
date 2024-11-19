@@ -1,34 +1,30 @@
 import assert from "node:assert";
 import Svg, {
   constants as svgConstants,
-  type schema as SVGSchema,
+  type UseAttributes,
 } from "@/features/svg";
 import { getAsset } from "@/utils/file";
 import { getColorBySuit } from "@/utils/palette";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import {
-  SuitIDs,
-  SuitTypes,
-  type SuitType,
-} from "@/features/suit/data/constants";
+import { SuitIDs, SuitTypes } from "@/features/suit/data/constants";
 import schema, {
   type SuitSVG,
   type SuitSymbol,
   type SuitUse,
 } from "@/features/suit/schema";
+import { type SuitType } from "@/features/suit/types";
 
 export type SuitsRegistry = Map<SuitType, Suit>;
 export type SuitUseOptions = Required<
   Pick<
-    SVGSchema.UseAttributes,
+    UseAttributes,
     typeof svgConstants.AttributeNames.X | typeof svgConstants.AttributeNames.Y
   >
 > &
-  Pick<
-    SVGSchema.UseAttributes,
-    typeof svgConstants.AttributeNames.TRANSFORM
-  > & { size: number };
+  Pick<UseAttributes, typeof svgConstants.AttributeNames.TRANSFORM> & {
+    size: number;
+  };
 
 class Suit {
   private readonly type: SuitType;
@@ -114,6 +110,7 @@ class Suit {
 }
 
 export * as constants from "@/features/suit/data/constants";
+export * from "@/features/suit/types";
 export { default as schema, type SuitSymbol } from "@/features/suit/schema";
 
 export default Suit;

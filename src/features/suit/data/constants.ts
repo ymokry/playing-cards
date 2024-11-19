@@ -4,7 +4,6 @@ export const SuitTypes = {
   DIAMONDS: "D",
   CLUBS: "C",
 } as const;
-export type SuitType = (typeof SuitTypes)[keyof typeof SuitTypes];
 
 export const SuitIDs = {
   [SuitTypes.CLUBS]: "sc",

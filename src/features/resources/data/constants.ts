@@ -4,4 +4,3 @@ export const ResourceTypes = {
   SUIT: "suit",
   PATTERN: "pattern",
 } as const;
-export type ResourceType = (typeof ResourceTypes)[keyof typeof ResourceTypes];
