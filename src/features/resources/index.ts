@@ -105,7 +105,7 @@ class Resources {
 
     assert(resource, `Pattern ${type} doesn't exist`);
 
-    return resource.symbol;
+    return resource.pattern;
   }
 }
 

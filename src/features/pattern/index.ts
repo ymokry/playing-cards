@@ -82,7 +82,7 @@ class Pattern {
     this.resource = result.data;
   }
 
-  get symbol(): PatternDef {
+  get pattern(): PatternDef {
     assert(this.resource, "Must be prepared before use");
 
     const resourceContent = this.resource[svgConstants.ElementNames.SVG];
