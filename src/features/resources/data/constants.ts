@@ -3,4 +3,5 @@ export const ResourceTypes = {
   RANK: "rank",
   SUIT: "suit",
   PATTERN: "pattern",
+  RECT: "rect",
 } as const;

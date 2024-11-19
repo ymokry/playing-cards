@@ -19,6 +19,11 @@ import Pattern, {
   type PatternRegistry,
   type PatternType,
 } from "@/features/pattern";
+import Rect, {
+  type RectDef,
+  type RectsRegistry,
+  type RectType,
+} from "@/features/rect";
 
 import { ResourceTypes } from "@/features/resources/data/constants";
 
@@ -27,6 +32,7 @@ interface ResourcesRegistry {
   [ResourceTypes.RANK]: RanksRegistry;
   [ResourceTypes.COURT]: CourtsRegistry;
   [ResourceTypes.PATTERN]: PatternRegistry;
+  [ResourceTypes.RECT]: RectsRegistry;
 }
 
 class Resources {
@@ -39,6 +45,7 @@ class Resources {
       [ResourceTypes.RANK]: Rank.registry,
       [ResourceTypes.COURT]: Court.registry,
       [ResourceTypes.PATTERN]: Pattern.registry,
+      [ResourceTypes.RECT]: Rect.registry,
     };
   }
 
@@ -106,6 +113,14 @@ class Resources {
     assert(resource, `Pattern ${type} doesn't exist`);
 
     return resource.pattern;
+  }
+
+  getRect(type: RectType): RectDef {
+    const resource = this.registry[ResourceTypes.RECT].get(type);
+
+    assert(resource, `Pattern ${type} doesn't exist`);
+
+    return resource.rect;
   }
 }
 

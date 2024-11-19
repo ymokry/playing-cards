@@ -29,6 +29,7 @@ const useElementSchema = z.object({
 });
 
 const rectAttributesSchema = z.object({
+  [AttributeNames.ID]: Attributes[AttributeNames.ID].optional(),
   [AttributeNames.WIDTH]: Attributes[AttributeNames.WIDTH],
   [AttributeNames.HEIGHT]: Attributes[AttributeNames.HEIGHT],
   [AttributeNames.FILL]: Attributes[AttributeNames.FILL].optional(),
@@ -36,6 +37,7 @@ const rectAttributesSchema = z.object({
   [AttributeNames.Y]: Attributes[AttributeNames.Y].optional(),
   [AttributeNames.RX]: Attributes[AttributeNames.RX].optional(),
   [AttributeNames.RY]: Attributes[AttributeNames.RY].optional(),
+  [AttributeNames.STROKE]: Attributes[AttributeNames.STROKE].optional(),
 });
 
 const rectContentSchema = z.object({
