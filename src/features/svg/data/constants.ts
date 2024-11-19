@@ -21,6 +21,7 @@ export const AttributeNames = {
   STROKE_LINECAP: "stroke-linecap",
   STROKE_LINEJOIN: "stroke-linejoin",
   STROKE_WIDTH: "stroke-width",
+  PATTERN_UNITS: "patternUnits",
 } as const;
 
 export const AttributeDefaults = {
@@ -48,4 +49,8 @@ export const ElementNames = {
   RECT: "rect",
   PATH: "path",
   USE: "use",
+} as const;
+
+export const PatternUnits = {
+  USER_SPACE: "userSpaceOnUse",
 } as const;

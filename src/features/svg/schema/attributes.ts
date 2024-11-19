@@ -7,6 +7,7 @@ import {
   AttributeNames,
   FillRules,
   StrokeTypes,
+  PatternUnits,
 } from "@/features/svg/data/constants";
 
 const paletteValueSchema = z.enum([
@@ -47,4 +48,5 @@ export default {
   [AttributeNames.STROKE_LINECAP]: strokeTypeSchema,
   [AttributeNames.STROKE_LINEJOIN]: strokeTypeSchema,
   [AttributeNames.STROKE_WIDTH]: pxValueSchema,
+  [AttributeNames.PATTERN_UNITS]: z.enum([PatternUnits.USER_SPACE]),
 };
