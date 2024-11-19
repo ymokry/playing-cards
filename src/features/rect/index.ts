@@ -45,18 +45,19 @@ class Rect {
 
   get rect(): RectDef {
     const attributes =
-      this.type === RectTypes.OUTER
+      this.type === RectTypes.INNER
         ? {
+            [svgConstants.AttributeNames.WIDTH]: CardInner.WIDTH,
+            [svgConstants.AttributeNames.HEIGHT]: CardInner.HEIGHT,
+            [svgConstants.AttributeNames.STROKE]: Palette.BLACK,
+          }
+        : {
             [svgConstants.AttributeNames.WIDTH]: CardOuter.WIDTH,
             [svgConstants.AttributeNames.HEIGHT]: CardOuter.HEIGHT,
             [svgConstants.AttributeNames.RX]: CardOuter.RADIUS,
             [svgConstants.AttributeNames.RY]: CardOuter.RADIUS,
-            [svgConstants.AttributeNames.FILL]: Palette.WHITE,
-          }
-        : {
-            [svgConstants.AttributeNames.WIDTH]: CardInner.WIDTH,
-            [svgConstants.AttributeNames.HEIGHT]: CardInner.HEIGHT,
-            [svgConstants.AttributeNames.STROKE]: Palette.BLACK,
+            [svgConstants.AttributeNames.FILL]:
+              this.type === RectTypes.OUTER ? Palette.WHITE : Palette.RED,
           };
 
     const result = schema.rect.safeParse({
