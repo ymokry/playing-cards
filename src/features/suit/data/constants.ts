@@ -1,8 +1,14 @@
-import { CardSuits } from "@/data/constants";
+export const SuitTypes = {
+  SPADES: "S",
+  HEARTS: "H",
+  DIAMONDS: "D",
+  CLUBS: "C",
+} as const;
+export type SuitType = (typeof SuitTypes)[keyof typeof SuitTypes];
 
 export const SuitIDs = {
-  [CardSuits.CLUBS]: "sc",
-  [CardSuits.DIAMONDS]: "sd",
-  [CardSuits.HEARTS]: "sh",
-  [CardSuits.SPADES]: "ss",
+  [SuitTypes.CLUBS]: "sc",
+  [SuitTypes.DIAMONDS]: "sd",
+  [SuitTypes.HEARTS]: "sh",
+  [SuitTypes.SPADES]: "ss",
 } as const;

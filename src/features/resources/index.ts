@@ -1,16 +1,23 @@
 import assert from "node:assert";
-import {
-  type CardSuit,
-  type CardRank,
-  type CourtCard,
-  type PatternType,
-} from "@/data/constants";
-import Rank, { type RankSymbol, type RanksRegistry } from "@/features/rank";
-import Suit, { type SuitSymbol, type SuitsRegistry } from "@/features/suit";
-import Court, { type CourtSymbol, type CourtsRegistry } from "@/features/court";
+import Rank, {
+  type RankSymbol,
+  type RanksRegistry,
+  type constants as RankConstants,
+} from "@/features/rank";
+import Suit, {
+  type SuitSymbol,
+  type SuitsRegistry,
+  type constants as SuitConstants,
+} from "@/features/suit";
+import Court, {
+  type CourtSymbol,
+  type CourtsRegistry,
+  type constants as CourtConstants,
+} from "@/features/court";
 import Pattern, {
   type PatternDef,
   type PatternRegistry,
+  type constants as PatternConstants,
 } from "@/features/pattern";
 
 import { ResourceTypes } from "@/features/resources/data/constants";
@@ -61,7 +68,7 @@ class Resources {
     this.loaded = true;
   }
 
-  getSuit(type: CardSuit): SuitSymbol {
+  getSuit(type: SuitConstants.SuitType): SuitSymbol {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.SUIT].get(type);
@@ -71,7 +78,7 @@ class Resources {
     return resource.symbol;
   }
 
-  getRank(type: CardRank): RankSymbol {
+  getRank(type: RankConstants.RankType): RankSymbol {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.RANK].get(type);
@@ -81,7 +88,7 @@ class Resources {
     return resource.symbol;
   }
 
-  getCourt(type: CourtCard): CourtSymbol {
+  getCourt(type: CourtConstants.CourtCard): CourtSymbol {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.COURT].get(type);
@@ -91,7 +98,7 @@ class Resources {
     return resource.symbol;
   }
 
-  getPattern(type: PatternType): PatternDef {
+  getPattern(type: PatternConstants.PatternType): PatternDef {
     assert(this.loaded, "Must be loaded before use");
 
     const resource = this.registry[ResourceTypes.PATTERN].get(type);

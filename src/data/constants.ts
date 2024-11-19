@@ -1,34 +1,5 @@
-export const CardRanks = {
-  ACE: "A",
-  TWO: "2",
-  THREE: "3",
-  FOUR: "4",
-  FIVE: "5",
-  SIX: "6",
-  SEVEN: "7",
-  EIGHT: "8",
-  NINE: "9",
-  TEN: "10",
-  JACK: "J",
-  QUEEN: "Q",
-  KING: "K",
-} as const;
-export type CardRank = (typeof CardRanks)[keyof typeof CardRanks];
-
-export const CardSuits = {
-  SPADES: "S",
-  HEARTS: "H",
-  DIAMONDS: "D",
-  CLUBS: "C",
-} as const;
-export type CardSuit = (typeof CardSuits)[keyof typeof CardSuits];
-
-export const CourtRanks = [
-  CardRanks.JACK,
-  CardRanks.QUEEN,
-  CardRanks.KING,
-] as const;
-export type CourtRank = (typeof CourtRanks)[number];
+import { constants as rankConstants } from "@/features/rank";
+import { type constants as SuitConstants } from "@/features/suit";
 
 export const SpecialCards = {
   BACK: "Back",
@@ -36,13 +7,7 @@ export const SpecialCards = {
 } as const;
 export type SpecialCard = (typeof SpecialCards)[keyof typeof SpecialCards];
 
-export type PlayingCard = `${CardSuit}_${CardRank}`;
-export type CourtCard = `${CardSuit}_${CourtRank}`;
-
-export const PatternTypes = {
-  BACK: "back",
-} as const;
-export type PatternType = (typeof PatternTypes)[keyof typeof PatternTypes];
+export type PlayingCard = `${SuitConstants.SuitType}_${rankConstants.RankType}`;
 
 export const Palette = {
   BLACK: "#151515",

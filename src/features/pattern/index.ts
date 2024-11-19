@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { PatternTypes, type PatternType, Palette } from "@/data/constants";
+import { Palette } from "@/data/constants";
 import Svg, {
   constants as svgConstants,
   type schema as SVGSchema,
@@ -7,7 +7,11 @@ import Svg, {
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import { PatternIDs } from "@/features/pattern/data/constants";
+import {
+  PatternIDs,
+  PatternTypes,
+  type PatternType,
+} from "@/features/pattern/data/constants";
 import schema, {
   type PatternSVG,
   type PatternDef,

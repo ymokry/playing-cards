@@ -1,5 +1,4 @@
 import assert from "node:assert";
-import { CardRanks, type CardRank } from "@/data/constants";
 import Svg, {
   constants as svgConstants,
   type schema as SVGSchema,
@@ -7,14 +6,18 @@ import Svg, {
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import { RankIDs } from "@/features/rank/data/constants";
+import {
+  RankIDs,
+  RanksTypes,
+  type RankType,
+} from "@/features/rank/data/constants";
 import schema, {
   type RankSVG,
   type RankSymbol,
   type RankUse,
 } from "@/features/rank/schema";
 
-export type RanksRegistry = Map<CardRank, Rank>;
+export type RanksRegistry = Map<RankType, Rank>;
 export type RankUseOptions = Required<
   Pick<
     SVGSchema.UseAttributes,
@@ -25,20 +28,20 @@ export type RankUseOptions = Required<
 > & { size: number };
 
 class Rank {
-  private readonly type: CardRank;
+  private readonly type: RankType;
   private resource: RankSVG | null = null;
 
   static get registry(): RanksRegistry {
-    const registry = new Map<CardRank, Rank>();
+    const registry = new Map<RankType, Rank>();
 
-    Object.values(CardRanks).forEach((rank) => {
+    Object.values(RanksTypes).forEach((rank) => {
       registry.set(rank, new Rank(rank));
     });
 
     return registry;
   }
 
-  static use(type: CardRank, { size, ...attributes }: RankUseOptions): RankUse {
+  static use(type: RankType, { size, ...attributes }: RankUseOptions): RankUse {
     const result = schema.use.safeParse({
       [svgConstants.attributesGroupName]: {
         [svgConstants.AttributeNames.XLINK_HREF]: `#${RankIDs[type]}`,
@@ -53,7 +56,7 @@ class Rank {
     return result.data;
   }
 
-  constructor(type: CardRank) {
+  constructor(type: RankType) {
     this.type = type;
   }
 

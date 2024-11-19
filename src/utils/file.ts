@@ -1,18 +1,16 @@
 import path from "node:path";
 import type { BunFile } from "bun";
-import {
-  type CardSuit,
-  type CardRank,
-  type CourtCard,
-  type PatternType,
-} from "@/data/constants";
+import { type constants as RankConstants } from "@/features/rank";
+import { type constants as SuitConstants } from "@/features/suit";
+import { type constants as CourtConstants } from "@/features/court";
+import { type constants as PatternConstants } from "@/features/pattern";
 import paths from "@/data/paths";
 
 type GetAssetOptions =
-  | { type: "suit"; suit: CardSuit }
-  | { type: "rank"; rank: CardRank }
-  | { type: "court"; court: CourtCard }
-  | { type: "pattern"; pattern: PatternType };
+  | { type: "suit"; suit: SuitConstants.SuitType }
+  | { type: "rank"; rank: RankConstants.RankType }
+  | { type: "court"; court: CourtConstants.CourtCard }
+  | { type: "pattern"; pattern: PatternConstants.PatternType };
 
 export const getAsset = (options: GetAssetOptions): BunFile => {
   let assetPath: string;

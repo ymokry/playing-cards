@@ -1,6 +1,11 @@
-import { CardSuits, type CardSuit } from "@/data/constants";
+import { constants as suitConstants } from "@/features/suit";
 
-const redSuits: Readonly<CardSuit[]> = [CardSuits.DIAMONDS, CardSuits.HEARTS];
+const redSuits: Readonly<suitConstants.SuitType[]> = [
+  suitConstants.SuitTypes.DIAMONDS,
+  suitConstants.SuitTypes.HEARTS,
+];
 
-export const isRedSuit = (suit: CardSuit): boolean => redSuits.includes(suit);
-export const isBlackSuit = (suit: CardSuit): boolean => !isRedSuit(suit);
+export const isRedSuit = (suit: suitConstants.SuitType): boolean =>
+  redSuits.includes(suit);
+export const isBlackSuit = (suit: suitConstants.SuitType): boolean =>
+  !isRedSuit(suit);

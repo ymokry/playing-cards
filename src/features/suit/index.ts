@@ -1,5 +1,4 @@
 import assert from "node:assert";
-import { CardSuits, type CardSuit } from "@/data/constants";
 import Svg, {
   constants as svgConstants,
   type schema as SVGSchema,
@@ -8,14 +7,18 @@ import { getAsset } from "@/utils/file";
 import { getColorBySuit } from "@/utils/palette";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import { SuitIDs } from "@/features/suit/data/constants";
+import {
+  SuitIDs,
+  SuitTypes,
+  type SuitType,
+} from "@/features/suit/data/constants";
 import schema, {
   type SuitSVG,
   type SuitSymbol,
   type SuitUse,
 } from "@/features/suit/schema";
 
-export type SuitsRegistry = Map<CardSuit, Suit>;
+export type SuitsRegistry = Map<SuitType, Suit>;
 export type SuitUseOptions = Required<
   Pick<
     SVGSchema.UseAttributes,
@@ -28,20 +31,20 @@ export type SuitUseOptions = Required<
   > & { size: number };
 
 class Suit {
-  private readonly type: CardSuit;
+  private readonly type: SuitType;
   private resource: SuitSVG | null = null;
 
   static get registry(): SuitsRegistry {
-    const registry = new Map<CardSuit, Suit>();
+    const registry = new Map<SuitType, Suit>();
 
-    Object.values(CardSuits).forEach((suit) => {
+    Object.values(SuitTypes).forEach((suit) => {
       registry.set(suit, new Suit(suit));
     });
 
     return registry;
   }
 
-  static use(type: CardSuit, { size, ...attributes }: SuitUseOptions): SuitUse {
+  static use(type: SuitType, { size, ...attributes }: SuitUseOptions): SuitUse {
     const result = schema.use.safeParse({
       [svgConstants.attributesGroupName]: {
         [svgConstants.AttributeNames.XLINK_HREF]: `#${SuitIDs[type]}`,
@@ -56,7 +59,7 @@ class Suit {
     return result.data;
   }
 
-  constructor(type: CardSuit) {
+  constructor(type: SuitType) {
     this.type = type;
   }
 

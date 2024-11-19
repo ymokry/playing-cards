@@ -1,11 +1,6 @@
 import assert from "node:assert";
-import {
-  CardSuits,
-  type CardRank,
-  CourtRanks,
-  type CourtRank,
-  type CourtCard,
-} from "@/data/constants";
+import { type constants as RankConstants } from "@/features/rank";
+import { constants as suitConstants } from "@/features/suit";
 import Svg, {
   constants as svgConstants,
   type schema as SVGSchema,
@@ -13,7 +8,12 @@ import Svg, {
 import { getAsset } from "@/utils/file";
 import { getParsingErrorMessage } from "@/utils/schema";
 
-import { CourtIDs } from "@/features/court/data/constants";
+import {
+  CourtIDs,
+  CourtRanks,
+  type CourtRank,
+  type CourtCard,
+} from "@/features/court/data/constants";
 import schema, {
   type CourtSVG,
   type CourtSymbol,
@@ -36,7 +36,7 @@ class Court {
   static get registry(): CourtsRegistry {
     const registry = new Map<CourtCard, Court>();
 
-    Object.values(CardSuits).forEach((suit) => {
+    Object.values(suitConstants.SuitTypes).forEach((suit) => {
       CourtRanks.forEach((rank) => {
         const court = `${suit}_${rank}` as const;
 
@@ -60,7 +60,7 @@ class Court {
     return result.data;
   }
 
-  static isCourtRank(type: CardRank): type is CourtRank {
+  static isCourtRank(type: RankConstants.RankType): type is CourtRank {
     return CourtRanks.includes(type as CourtRank);
   }
 
