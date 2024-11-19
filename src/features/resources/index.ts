@@ -1,8 +1,17 @@
 import assert from "node:assert";
-import { type CardSuit, type CardRank, type CourtCard } from "@/data/constants";
+import {
+  type CardSuit,
+  type CardRank,
+  type CourtCard,
+  type PatternType,
+} from "@/data/constants";
 import Rank, { type RankSymbol, type RanksRegistry } from "@/features/rank";
 import Suit, { type SuitSymbol, type SuitsRegistry } from "@/features/suit";
 import Court, { type CourtSymbol, type CourtsRegistry } from "@/features/court";
+import Pattern, {
+  type PatternDef,
+  type PatternRegistry,
+} from "@/features/pattern";
 
 import { ResourceTypes } from "@/features/resources/data/constants";
 
@@ -10,6 +19,7 @@ interface ResourcesRegistry {
   [ResourceTypes.SUIT]: SuitsRegistry;
   [ResourceTypes.RANK]: RanksRegistry;
   [ResourceTypes.COURT]: CourtsRegistry;
+  [ResourceTypes.PATTERN]: PatternRegistry;
 }
 
 class Resources {
@@ -21,6 +31,7 @@ class Resources {
       [ResourceTypes.SUIT]: Suit.registry,
       [ResourceTypes.RANK]: Rank.registry,
       [ResourceTypes.COURT]: Court.registry,
+      [ResourceTypes.PATTERN]: Pattern.registry,
     };
   }
 
@@ -39,6 +50,10 @@ class Resources {
 
     this.registry[ResourceTypes.COURT].forEach((court) => {
       resourcePromises.push(court.prepare());
+    });
+
+    this.registry[ResourceTypes.PATTERN].forEach((pattern) => {
+      resourcePromises.push(pattern.prepare());
     });
 
     await Promise.all(resourcePromises);
@@ -71,7 +86,17 @@ class Resources {
 
     const resource = this.registry[ResourceTypes.COURT].get(type);
 
-    assert(resource, `Rank ${type} doesn't exist`);
+    assert(resource, `Court ${type} doesn't exist`);
+
+    return resource.symbol;
+  }
+
+  getPattern(type: PatternType): PatternDef {
+    assert(this.loaded, "Must be loaded before use");
+
+    const resource = this.registry[ResourceTypes.PATTERN].get(type);
+
+    assert(resource, `Pattern ${type} doesn't exist`);
 
     return resource.symbol;
   }

@@ -3,4 +3,5 @@ export {
   default as elements,
   type SVGElement,
   type UseAttributes,
+  type RectAttributes,
 } from "@/features/svg/schema/elements";

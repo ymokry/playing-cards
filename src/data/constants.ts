@@ -39,6 +39,11 @@ export type SpecialCard = (typeof SpecialCards)[keyof typeof SpecialCards];
 export type PlayingCard = `${CardSuit}_${CardRank}`;
 export type CourtCard = `${CardSuit}_${CourtRank}`;
 
+export const PatternTypes = {
+  BACK: "back",
+} as const;
+export type PatternType = (typeof PatternTypes)[keyof typeof PatternTypes];
+
 export const Palette = {
   BLACK: "#151515",
   BLUE: "#152AAB",

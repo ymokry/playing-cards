@@ -38,6 +38,7 @@ const rectAttributesSchema = z.object({
   [AttributeNames.RX]: Attributes[AttributeNames.RX].optional(),
   [AttributeNames.RY]: Attributes[AttributeNames.RY].optional(),
 });
+export type RectAttributes = z.infer<typeof rectAttributesSchema>;
 
 const rectContentSchema = z.object({
   [attributesGroupName]: rectAttributesSchema,
