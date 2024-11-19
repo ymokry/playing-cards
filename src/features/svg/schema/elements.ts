@@ -246,6 +246,7 @@ export default {
   [ElementNames.RECT]: {
     attributes: rectAttributesSchema,
     content: rectContentSchema,
+    contentWithId: rectWithIDContentSchema,
     element: rectElementSchema,
   },
   [ElementNames.PATH]: {
