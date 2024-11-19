@@ -22,7 +22,7 @@ import schema, {
 import setCourtColor from "@/features/court/utils/setCourtColor";
 
 export type CourtsRegistry = Map<CourtCard, Court>;
-type CourtUseOptions = Required<
+export type CourtUseOptions = Required<
   Pick<
     SVGSchema.UseAttributes,
     typeof svgConstants.AttributeNames.X | typeof svgConstants.AttributeNames.Y
@@ -60,7 +60,7 @@ class Court {
     return result.data;
   }
 
-  static isCourtRank(type: CardRank): boolean {
+  static isCourtRank(type: CardRank): type is CourtRank {
     return CourtRanks.includes(type as CourtRank);
   }
 

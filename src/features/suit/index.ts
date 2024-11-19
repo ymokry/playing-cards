@@ -16,7 +16,7 @@ import schema, {
 } from "@/features/suit/schema";
 
 export type SuitsRegistry = Map<CardSuit, Suit>;
-type SuitUseOptions = Required<
+export type SuitUseOptions = Required<
   Pick<
     SVGSchema.UseAttributes,
     typeof svgConstants.AttributeNames.X | typeof svgConstants.AttributeNames.Y

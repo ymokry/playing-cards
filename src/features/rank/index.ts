@@ -15,7 +15,7 @@ import schema, {
 } from "@/features/rank/schema";
 
 export type RanksRegistry = Map<CardRank, Rank>;
-type RankUseOptions = Required<
+export type RankUseOptions = Required<
   Pick<
     SVGSchema.UseAttributes,
     | typeof svgConstants.AttributeNames.X
