@@ -1,0 +1,43 @@
+name: Build and Push to Dist
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install and Build
+        run: |
+          bun install
+          bun run build
+      - name: Move assets to Dist branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Configure Git
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git config --global init.defaultBranch dist
+
+          # Switch to a temporary directory
+          mkdir .temp
+          cp -R dist/* .temp/
+          cd .temp
+
+          # Initialize new Git repository
+          git init
+          git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
+          # Add and commit changes
+          git add .
+          git commit -m "release: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+          # Force push to the dist branch
+          git push --force origin dist
