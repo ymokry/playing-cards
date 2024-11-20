@@ -8,8 +8,8 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{json,html,css,md}": "prettier --write",
-    "*.{ts,tsx}": [
+    "*.{json,md,yaml}": "prettier --write",
+    "*.{ts}": [
       "prettier --write"
     ]
   },
