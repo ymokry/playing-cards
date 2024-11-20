@@ -43,9 +43,12 @@ const patternRectSchema = z.object({
   [constants.attributesGroupName]: schema.elements[
     constants.ElementNames.RECT
   ].attributes
-    .omit({
-      [constants.AttributeNames.RX]: true,
-      [constants.AttributeNames.RY]: true,
+    .pick({
+      [constants.AttributeNames.WIDTH]: true,
+      [constants.AttributeNames.HEIGHT]: true,
+      [constants.AttributeNames.X]: true,
+      [constants.AttributeNames.Y]: true,
+      [constants.AttributeNames.FILL]: true,
     })
     .required()
     .merge(
