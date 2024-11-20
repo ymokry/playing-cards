@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { BunFile } from "bun";
+import { $, type BunFile } from "bun";
 import { type RankType } from "@/features/rank";
 import { type SuitType } from "@/features/suit";
 import { type CourtCard } from "@/features/court";
@@ -39,4 +39,10 @@ export const getAsset = (options: GetAssetOptions): BunFile => {
   }
 
   return Bun.file(assetPath, { type: "image/svg+xml" });
+};
+
+export const prepareDist = async () => {
+  await $`rm -rf ${paths.dist}`;
+
+  return $`mkdir ${paths.dist}`;
 };
