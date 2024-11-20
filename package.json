@@ -3,7 +3,8 @@
   "type": "module",
   "module": "src/index.ts",
   "scripts": {
-    "generate": "bun run src/index.ts",
+    "build": "bun run src/index.ts",
+    "postbuild": "svgo dist",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -14,16 +15,17 @@
   },
   "dependencies": {
     "fast-xml-parser": "^4.5.0",
+    "svgo": "^3.3.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
     "@types/bun": "latest",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
-    "prettier-plugin-packagejson": "^2.5.3"
+    "prettier-plugin-packagejson": "^2.5.5"
   },
   "peerDependencies": {
     "typescript": "^5.6.3"
