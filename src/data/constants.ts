@@ -11,7 +11,6 @@ export type PlayingCard = `${SuitType}_${RankType}`;
 
 export const Palette = {
   BLACK: "#151515",
-  BLUE: "#152AAB",
   NONE: "none",
   RED: "#AB2A15",
   WHITE: "#fff",

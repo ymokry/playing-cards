@@ -107,7 +107,7 @@ class Pattern {
         [svgConstants.attributesGroupName]: {
           [svgConstants.AttributeNames.D]:
             resourcePathAttributes[svgConstants.AttributeNames.D],
-          [svgConstants.AttributeNames.FILL]: Palette.BLUE,
+          [svgConstants.AttributeNames.FILL]: Palette.RED,
           ...(resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE] && {
             [svgConstants.AttributeNames.FILL_RULE]:
               resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE],

@@ -12,7 +12,6 @@ import {
 
 const paletteValueSchema = z.enum([
   Palette.BLACK,
-  Palette.BLUE,
   Palette.NONE,
   Palette.RED,
   Palette.WHITE,
