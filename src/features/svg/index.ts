@@ -55,11 +55,12 @@ class SVG {
 export * as constants from "@/features/svg/data/constants";
 export {
   default as schema,
-  type SVGElement,
   type RectAttributes,
-  type UseAttributes,
-  type SymbolContent,
   type RectWithIDContent,
+  type SVGContent,
+  type SVGElement,
+  type SymbolContent,
+  type UseAttributes,
 } from "@/features/svg/schema";
 
 export default new SVG();
