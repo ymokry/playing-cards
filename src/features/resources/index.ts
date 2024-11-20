@@ -125,6 +125,5 @@ class Resources {
 }
 
 export * as constants from "@/features/resources/data/constants";
-export * from "@/features/resources/types";
 
 export default new Resources();
