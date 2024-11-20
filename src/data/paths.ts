@@ -5,4 +5,5 @@ const srcPath = path.resolve(rootPath, "src");
 
 export default {
   assets: path.resolve(srcPath, "assets"),
+  dist: path.resolve(rootPath, "dist"),
 };
