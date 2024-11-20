@@ -39,29 +39,29 @@ const suitSizes = {
 
 const GAP = PPI / SAFE_ZONE_OFFSET;
 const gaps = {
-  LG: GAP * 8,
-  MD: GAP * 6,
-  XM: GAP * 4,
-  XS: GAP,
+  LG: GAP * GAP,
+  MD: GAP,
 } as const;
 
 const signRank = {
   SIZE: (PPI / 3) * 2,
-  X: SAFE_ZONE_OFFSET - GAP,
+  X: SAFE_ZONE_OFFSET - gaps.MD,
   Y: SAFE_ZONE_OFFSET,
 } as const;
 
 const signSuit = {
   SIZE: suitSizes.MD,
   X: SAFE_ZONE_OFFSET,
-  Y: SAFE_ZONE_OFFSET + signRank.SIZE + GAP,
+  Y: SAFE_ZONE_OFFSET + signRank.SIZE + gaps.MD,
 } as const;
 
-const CENTER_ROW = content.MARGIN + suitSizes.LG * 2;
-const BOTTOM_ROW = content.MARGIN + suitSizes.LG * 4;
 const numericContent = {
   SIZE: suitSizes.LG,
-  ACE: suitSizes.LG * 3,
+  ACE: {
+    SIZE: suitSizes.LG * 3,
+    X: CONTENT_OFFSET,
+    Y: CONTENT_OFFSET * 2,
+  },
   COLUMNS: {
     LEFT: content.MARGIN,
     MIDDLE: content.MARGIN + suitSizes.LG,
@@ -69,14 +69,10 @@ const numericContent = {
   },
   ROWS: {
     TOP: content.MARGIN,
-    TOP_CENTER: content.MARGIN + gaps.LG,
-    TOP_BOTTOM: content.MARGIN + suitSizes.LG,
-    CENTER_TOP: CENTER_ROW - gaps.LG,
-    CENTER: CENTER_ROW,
-    CENTER_BOTTOM: CENTER_ROW + gaps.LG,
-    BOTTOM_TOP: content.MARGIN + suitSizes.LG * 3,
-    BOTTOM_CENTER: BOTTOM_ROW - gaps.LG,
-    BOTTOM: BOTTOM_ROW,
+    CENTER_TOP: content.MARGIN + suitSizes.LG - gaps.LG,
+    CENTER: content.MARGIN + suitSizes.LG,
+    CENTER_BOTTOM: content.MARGIN + suitSizes.LG + gaps.LG,
+    BOTTOM: content.MARGIN + suitSizes.LG * 2,
   },
 } as const;
 
