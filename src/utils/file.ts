@@ -46,3 +46,14 @@ export const prepareDist = async () => {
 
   return $`mkdir ${paths.dist}`;
 };
+
+export const saveCard = (
+  cardName: string,
+  cardContent: string
+): Promise<number> => {
+  const file = Bun.file(path.resolve(paths.dist, `${cardName}.svg`), {
+    type: "image/svg+xml",
+  });
+
+  return Bun.write(file, cardContent);
+};
