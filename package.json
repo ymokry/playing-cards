@@ -3,6 +3,7 @@
   "type": "module",
   "module": "src/index.ts",
   "scripts": {
+    "generate": "bun run src/index.ts",
     "prepare": "husky"
   },
   "lint-staged": {
