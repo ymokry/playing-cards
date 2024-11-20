@@ -120,25 +120,25 @@ type GetCardOptions =
   | { type: Exclude<CardType, typeof CardTypes.PLAYING> }
   | { type: typeof CardTypes.PLAYING; suit: SuitType; rank: RankType };
 
-const getCard = (options: GetCardOptions) => {
-  let layout: SVGElement;
+export default {
+  get: (options: GetCardOptions) => {
+    let layout: SVGElement;
 
-  switch (options.type) {
-    case CardTypes.PLAYING: {
-      layout = getPlayingCard(options.suit, options.rank);
-      break;
+    switch (options.type) {
+      case CardTypes.PLAYING: {
+        layout = getPlayingCard(options.suit, options.rank);
+        break;
+      }
+      case CardTypes.BACK: {
+        layout = getBackCard();
+        break;
+      }
+      case CardTypes.CUT: {
+        layout = getCutCard();
+        break;
+      }
     }
-    case CardTypes.BACK: {
-      layout = getBackCard();
-      break;
-    }
-    case CardTypes.CUT: {
-      layout = getCutCard();
-      break;
-    }
-  }
 
-  return SVG.stringify(layout);
+    return SVG.stringify(layout);
+  },
 };
-
-export default getCard;

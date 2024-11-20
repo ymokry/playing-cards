@@ -18,39 +18,15 @@ type SVGOptions = Required<
   >
 >;
 
-class SVG {
-  private readonly parser: XMLParser;
-  private readonly builder: XMLBuilder;
+const options: Readonly<SVGOptions> = {
+  attributesGroupName,
+  ignoreAttributes: false,
+  attributeNamePrefix: "",
+  unpairedTags: [ElementNames.PATH, ElementNames.RECT, ElementNames.USE],
+};
 
-  constructor() {
-    const options: SVGOptions = {
-      attributesGroupName,
-      ignoreAttributes: false,
-      attributeNamePrefix: "",
-      unpairedTags: [ElementNames.PATH, ElementNames.RECT, ElementNames.USE],
-    };
-
-    this.parser = new XMLParser(options);
-    this.builder = new XMLBuilder({ suppressUnpairedNode: false, ...options });
-  }
-
-  parse(input: string): SVGElement {
-    const content = this.parser.parse(input);
-    const result = schema.elements[ElementNames.SVG].element.safeParse(content);
-
-    assert(result.success, getParsingErrorMessage(result.error));
-
-    return result.data;
-  }
-
-  stringify(input: SVGElement): string {
-    const result = schema.elements[ElementNames.SVG].element.safeParse(input);
-
-    assert(result.success, getParsingErrorMessage(result.error));
-
-    return this.builder.build(result.data);
-  }
-}
+const parser = new XMLParser(options);
+const builder = new XMLBuilder({ suppressUnpairedNode: false, ...options });
 
 export * as constants from "@/features/svg/data/constants";
 export {
@@ -64,4 +40,20 @@ export {
   type UseContent,
 } from "@/features/svg/schema";
 
-export default new SVG();
+export default {
+  parse: (input: string): SVGElement => {
+    const content = parser.parse(input);
+    const result = schema.elements[ElementNames.SVG].element.safeParse(content);
+
+    assert(result.success, getParsingErrorMessage(result.error));
+
+    return result.data;
+  },
+  stringify: (input: SVGElement): string => {
+    const result = schema.elements[ElementNames.SVG].element.safeParse(input);
+
+    assert(result.success, getParsingErrorMessage(result.error));
+
+    return builder.build(result.data);
+  },
+};
