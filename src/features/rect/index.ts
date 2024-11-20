@@ -1,5 +1,6 @@
 import assert from "node:assert";
-import { CardOuter, CardInner, Palette } from "@/data/constants";
+import config from "@/data/config";
+import { Palette } from "@/data/constants";
 import { constants as svgConstants, type UseAttributes } from "@/features/svg";
 import { getParsingErrorMessage } from "@/utils/schema";
 
@@ -47,15 +48,16 @@ class Rect {
     const attributes =
       this.type === RectTypes.INNER
         ? {
-            [svgConstants.AttributeNames.WIDTH]: CardInner.WIDTH,
-            [svgConstants.AttributeNames.HEIGHT]: CardInner.HEIGHT,
+            [svgConstants.AttributeNames.WIDTH]: config.content.WIDTH,
+            [svgConstants.AttributeNames.HEIGHT]: config.content.HEIGHT,
             [svgConstants.AttributeNames.STROKE]: Palette.BLACK,
+            [svgConstants.AttributeNames.FILL]: Palette.NONE,
           }
         : {
-            [svgConstants.AttributeNames.WIDTH]: CardOuter.WIDTH,
-            [svgConstants.AttributeNames.HEIGHT]: CardOuter.HEIGHT,
-            [svgConstants.AttributeNames.RX]: CardOuter.RADIUS,
-            [svgConstants.AttributeNames.RY]: CardOuter.RADIUS,
+            [svgConstants.AttributeNames.WIDTH]: config.card.WIDTH,
+            [svgConstants.AttributeNames.HEIGHT]: config.card.HEIGHT,
+            [svgConstants.AttributeNames.RX]: config.card.RADIUS,
+            [svgConstants.AttributeNames.RY]: config.card.RADIUS,
             [svgConstants.AttributeNames.FILL]:
               this.type === RectTypes.OUTER ? Palette.WHITE : Palette.RED,
           };
