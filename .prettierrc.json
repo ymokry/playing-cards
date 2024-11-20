@@ -1,17 +1,8 @@
-/**
- * Some of Prettier's defaults can be overridden by an EditorConfig file.
- * Define those here to ensure that doesn't happen.
- *
- * See: https://github.com/prettier/prettier/blob/main/docs/configuration.md#editorconfig
- */
-
 {
-  /* Global defaults START */
   "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
   "endOfLine": "lf",
-  /* Global defaults END */
   "semi": true,
   "singleQuote": false,
   "quoteProps": "as-needed",
