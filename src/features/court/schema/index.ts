@@ -59,19 +59,21 @@ const courtSvgSchema = z.object({
 });
 export type CourtSVG = z.infer<typeof courtSvgSchema>;
 
-const courtSymbolSchema = z.object({
-  [constants.attributesGroupName]: schema.elements[
-    constants.ElementNames.SYMBOL
-  ].attributes
-    .pick({
-      [constants.AttributeNames.ID]: true,
-      [constants.AttributeNames.FILL]: true,
-      [constants.AttributeNames.WIDTH]: true,
-      [constants.AttributeNames.HEIGHT]: true,
-    })
-    .required(),
-  [constants.ElementNames.PATH]: courtPathSchema,
-});
+const courtSymbolSchema = z
+  .object({
+    [constants.attributesGroupName]: schema.elements[
+      constants.ElementNames.SYMBOL
+    ].attributes
+      .pick({
+        [constants.AttributeNames.ID]: true,
+        [constants.AttributeNames.FILL]: true,
+        [constants.AttributeNames.WIDTH]: true,
+        [constants.AttributeNames.HEIGHT]: true,
+      })
+      .required(),
+    [constants.ElementNames.PATH]: courtPathSchema,
+  })
+  .merge(schema.elements[constants.ElementNames.USE].element);
 export type CourtSymbol = z.infer<typeof courtSymbolSchema>;
 
 const courtUseSchema = z.object({

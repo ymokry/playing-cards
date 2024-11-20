@@ -15,6 +15,7 @@ import schema, {
   type CourtUse,
 } from "@/features/court/schema";
 import setCourtColor from "@/features/court/utils/setCourtColor";
+import getCourtSuits from "@/features/court/utils/getCourtSuits";
 import { type CourtRank, type CourtCard } from "@/features/court/types";
 
 export type CourtsRegistry = Map<CourtCard, Court>;
@@ -98,6 +99,7 @@ class Court {
       },
       [svgConstants.ElementNames.PATH]:
         resourceContent[svgConstants.ElementNames.PATH],
+      [svgConstants.ElementNames.USE]: getCourtSuits(this.type),
     });
 
     assert(result.success, getParsingErrorMessage(result.error));

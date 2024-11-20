@@ -61,6 +61,7 @@ export {
   type SVGElement,
   type SymbolContent,
   type UseAttributes,
+  type UseContent,
 } from "@/features/svg/schema";
 
 export default new SVG();
