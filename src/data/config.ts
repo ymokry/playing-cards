@@ -26,7 +26,7 @@ const safeZone = {
 const CONTENT_OFFSET = PPI;
 const content = {
   WIDTH: card.WIDTH - CONTENT_OFFSET * 2,
-  HEIGHT: card.WIDTH - CONTENT_OFFSET * 2,
+  HEIGHT: card.HEIGHT - CONTENT_OFFSET * 2,
   MARGIN: CONTENT_OFFSET,
 } as const;
 
