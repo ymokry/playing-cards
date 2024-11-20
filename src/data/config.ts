@@ -31,9 +31,10 @@ const content = {
 } as const;
 
 const suitSizes = {
-  LG: PPI,
-  MD: PPI / 2,
-  SM: PPI / 4,
+  XL: PPI,
+  LG: PPI / 2,
+  MD: PPI / 4,
+  SM: PPI / 6,
   XS: PPI / 8,
 } as const;
 
@@ -50,29 +51,29 @@ const signRank = {
 } as const;
 
 const signSuit = {
-  SIZE: suitSizes.MD,
+  SIZE: suitSizes.LG,
   X: SAFE_ZONE_OFFSET,
   Y: SAFE_ZONE_OFFSET + signRank.SIZE + gaps.MD,
 } as const;
 
 const numericContent = {
-  SIZE: suitSizes.LG,
+  SIZE: suitSizes.XL,
   ACE: {
-    SIZE: suitSizes.LG * 3,
+    SIZE: suitSizes.XL * 3,
     X: CONTENT_OFFSET,
     Y: CONTENT_OFFSET * 2,
   },
   COLUMNS: {
     LEFT: content.MARGIN,
-    MIDDLE: content.MARGIN + suitSizes.LG,
-    RIGHT: content.MARGIN + suitSizes.LG * 2,
+    MIDDLE: content.MARGIN + suitSizes.XL,
+    RIGHT: content.MARGIN + suitSizes.XL * 2,
   },
   ROWS: {
     TOP: content.MARGIN,
-    CENTER_TOP: content.MARGIN + suitSizes.LG - gaps.LG,
-    CENTER: content.MARGIN + suitSizes.LG,
-    CENTER_BOTTOM: content.MARGIN + suitSizes.LG + gaps.LG,
-    BOTTOM: content.MARGIN + suitSizes.LG * 2,
+    CENTER_TOP: content.MARGIN + suitSizes.XL - gaps.LG,
+    CENTER: content.MARGIN + suitSizes.XL,
+    CENTER_BOTTOM: content.MARGIN + suitSizes.XL + gaps.LG,
+    BOTTOM: content.MARGIN + suitSizes.XL * 2,
   },
 } as const;
 
