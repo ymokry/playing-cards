@@ -1,4 +1,5 @@
 import assert from "node:assert";
+import { Palette } from "@/data/constants";
 import Svg, {
   constants as svgConstants,
   type UseAttributes,
@@ -12,6 +13,7 @@ import schema, {
   type RankSymbol,
   type RankUse,
 } from "@/features/rank/schema";
+import removeDefaultRankStroke from "@/features/rank/utils/removeDefaultRankStroke";
 import { type RankType } from "@/features/rank/types";
 
 export type RanksRegistry = Map<RankType, Rank>;
@@ -20,7 +22,7 @@ export type RankUseOptions = Required<
     UseAttributes,
     | typeof svgConstants.AttributeNames.X
     | typeof svgConstants.AttributeNames.Y
-    | typeof svgConstants.AttributeNames.FILL
+    | typeof svgConstants.AttributeNames.STROKE
   >
 > & { size: number };
 
@@ -66,7 +68,7 @@ class Rank {
     assert(canRead, `Cannot find ${file.name} asset`);
 
     const fileContent = await file.text();
-    const svg = Svg.parse(fileContent);
+    const svg = Svg.parse(removeDefaultRankStroke(fileContent));
 
     const result = schema.svg.safeParse(svg);
 
@@ -91,6 +93,7 @@ class Rank {
         [svgConstants.AttributeNames.ID]: RankIDs[this.type],
         [svgConstants.AttributeNames.VIEW_BOX]:
           resourceAttributes[svgConstants.AttributeNames.VIEW_BOX],
+        [svgConstants.AttributeNames.FILL]: Palette.NONE,
         [svgConstants.AttributeNames.PRESERVE_ASPECT_RATIO]:
           svgConstants.AspectRatios.MIN_MID,
       },
@@ -98,10 +101,10 @@ class Rank {
         [svgConstants.attributesGroupName]: {
           [svgConstants.AttributeNames.D]:
             resourcePathAttributes[svgConstants.AttributeNames.D],
-          ...(resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE] && {
-            [svgConstants.AttributeNames.FILL_RULE]:
-              resourcePathAttributes[svgConstants.AttributeNames.FILL_RULE],
-          }),
+          [svgConstants.AttributeNames.STROKE_LINECAP]:
+            resourcePathAttributes[svgConstants.AttributeNames.STROKE_LINECAP],
+          [svgConstants.AttributeNames.STROKE_WIDTH]:
+            resourcePathAttributes[svgConstants.AttributeNames.STROKE_WIDTH],
         },
       },
     });

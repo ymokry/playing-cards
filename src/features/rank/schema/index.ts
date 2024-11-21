@@ -4,10 +4,13 @@ import { schema, constants } from "@/features/svg";
 const pathAttributesSchema =
   schema.elements[constants.ElementNames.PATH].attributes;
 
-const rankPathAttributesSchema = pathAttributesSchema.pick({
-  [constants.AttributeNames.D]: true,
-  [constants.AttributeNames.FILL_RULE]: true,
-});
+const rankPathAttributesSchema = pathAttributesSchema
+  .pick({
+    [constants.AttributeNames.D]: true,
+    [constants.AttributeNames.STROKE_LINECAP]: true,
+    [constants.AttributeNames.STROKE_WIDTH]: true,
+  })
+  .required();
 
 const rankSvgSchema = z.object({
   [constants.ElementNames.SVG]: z.object({
@@ -16,6 +19,7 @@ const rankSvgSchema = z.object({
     ].attributes
       .pick({
         [constants.AttributeNames.XMLNS]: true,
+        [constants.AttributeNames.FILL]: true,
         [constants.AttributeNames.VIEW_BOX]: true,
       })
       .required(),
@@ -33,6 +37,7 @@ const rankSymbolSchema = z.object({
     .pick({
       [constants.AttributeNames.ID]: true,
       [constants.AttributeNames.VIEW_BOX]: true,
+      [constants.AttributeNames.FILL]: true,
       [constants.AttributeNames.PRESERVE_ASPECT_RATIO]: true,
     })
     .required(),
@@ -46,7 +51,14 @@ const rankUseSchema = z.object({
   [constants.attributesGroupName]: schema.elements[
     constants.ElementNames.USE
   ].attributes
-    .omit({ [constants.AttributeNames.TRANSFORM]: true })
+    .pick({
+      [constants.AttributeNames.XLINK_HREF]: true,
+      [constants.AttributeNames.WIDTH]: true,
+      [constants.AttributeNames.HEIGHT]: true,
+      [constants.AttributeNames.X]: true,
+      [constants.AttributeNames.Y]: true,
+      [constants.AttributeNames.STROKE]: true,
+    })
     .required(),
 });
 export type RankUse = z.infer<typeof rankUseSchema>;

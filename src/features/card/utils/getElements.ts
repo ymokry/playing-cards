@@ -47,7 +47,7 @@ const getElements = (
           svgConstants.ElementNames.USE,
           Rank.use(options.rank, {
             ...item,
-            [svgConstants.AttributeNames.FILL]: Suit.getColorBySuit(
+            [svgConstants.AttributeNames.STROKE]: Suit.getColorBySuit(
               options.suit
             ),
           })
