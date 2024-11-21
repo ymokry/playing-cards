@@ -49,9 +49,12 @@ const useAttributesSchema =
 
 const suitUseSchema = z.object({
   [constants.attributesGroupName]: useAttributesSchema
-    .omit({
-      [constants.AttributeNames.FILL]: true,
-      [constants.AttributeNames.TRANSFORM]: true,
+    .pick({
+      [constants.AttributeNames.XLINK_HREF]: true,
+      [constants.AttributeNames.WIDTH]: true,
+      [constants.AttributeNames.HEIGHT]: true,
+      [constants.AttributeNames.X]: true,
+      [constants.AttributeNames.Y]: true,
     })
     .required()
     .merge(
