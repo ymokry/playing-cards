@@ -45,8 +45,8 @@ const gaps = {
 } as const;
 
 const signRank = {
-  SIZE: (PPI / 3) * 2,
-  X: SAFE_ZONE_OFFSET - gaps.MD,
+  SIZE: (PPI / 4) * 3,
+  X: SAFE_ZONE_OFFSET / 2,
   Y: SAFE_ZONE_OFFSET,
 } as const;
 
