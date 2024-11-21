@@ -39,6 +39,7 @@ export const FillRules = {
 
 export const StrokeTypes = {
   ROUND: "round",
+  SQUARE: "square",
 } as const;
 
 export const PatternUnits = {

@@ -18,7 +18,7 @@ const paletteValueSchema = z.enum([
 ]);
 const pxValueSchema = z.coerce.number().nonnegative();
 const coordinateValueSchema = z.coerce.number();
-const strokeTypeSchema = z.enum([StrokeTypes.ROUND]);
+const strokeTypeSchema = z.enum([StrokeTypes.ROUND, StrokeTypes.SQUARE]);
 
 export default {
   [AttributeNames.XMLNS]: z.literal(AttributeDefaults[AttributeNames.XMLNS]),
