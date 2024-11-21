@@ -10,6 +10,7 @@ import Attributes from "@/features/svg/schema/attributes";
 const useAttributesSchema = z.object({
   [AttributeNames.XLINK_HREF]: Attributes[AttributeNames.XLINK_HREF],
   [AttributeNames.FILL]: Attributes[AttributeNames.FILL].optional(),
+  [AttributeNames.STROKE]: Attributes[AttributeNames.STROKE].optional(),
   [AttributeNames.WIDTH]: Attributes[AttributeNames.WIDTH].optional(),
   [AttributeNames.HEIGHT]: Attributes[AttributeNames.HEIGHT].optional(),
   [AttributeNames.X]: Attributes[AttributeNames.X].optional(),
